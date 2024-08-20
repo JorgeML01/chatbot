@@ -1,0 +1,7 @@
+.navbar-body {
+    /* Pon el fondo de otro color sólo para testear. */
+    background-color: #78dc44 !important;
+    /* Use a popular font for navbars. */
+    font-family: 'Roboto', sans-serif;
+}
+
