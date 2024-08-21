@@ -1,0 +1,24 @@
+.upper-buttons {
+    display: flex;
+    align-items: center;     /* Centrar verticalmente */
+    height: 15vh;            /* Asegura que ocupe 20% de la altura de la pantalla */
+    margin-bottom: -15px;        /* Elimina cualquier margen inferior */
+    margin-left: 4%;
+    border: none; /* Elimina el borde si no se necesita */
+    /* border: 2px solid red; */
+}
+
+.button-main {
+    font-family: 'Roboto', sans-serif;
+    background-color: #78dc44 !important;
+    color: rgb(255, 255, 255) !important;
+    display: flex;
+    align-items: center;
+    margin: 0 10px; /* Espaciado horizontal entre los botones */
+    margin-bottom: 0;
+}
+
+.button-main:hover {
+    background-color: #5cbf2a !important;
+    color: rgb(255, 255, 255) !important;
+}

@@ -15,13 +15,18 @@ function NavbarLayout() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="chatbot">Chat</Nav.Link>
+              <Nav.Link href="chatbot">Chat</Nav.Link> 
             </Nav>
             <Nav>
-              <Nav.Link href="Settings">Settings</Nav.Link>
-              <Nav.Link eventKey={2} href="Profile">
-                Profile
-              </Nav.Link>
+              {/* Poner nombre y la fotito. Que se pueda agregar foto de perfil. Al darle que esté la opción de settings.*/}
+              <NavDropdown title="Perfil" id="basic-nav-dropdown">
+              <NavDropdown.Item href="perfil">Perfil</NavDropdown.Item>
+              <NavDropdown.Item href="settings">
+                Settings
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/">Log out</NavDropdown.Item>
+            </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>

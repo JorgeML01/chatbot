@@ -1,7 +1,39 @@
 .navbar-body {
-    /* Pon el fondo de otro color sólo para testear. */
     background-color: #78dc44 !important;
-    /* Use a popular font for navbars. */
+    color: white !important; /* Cambia este valor por el color que prefieras */
     font-family: 'Roboto', sans-serif;
+
+
+
+    
+    /* Bottom color */
+    border-bottom: 2px solid #78dc44 !important; /* Cambia el color del borde inferior */
 }
 
+/* Si quieres cambiar específicamente el color de los enlaces */
+.navbar-body .nav-link, 
+.navbar-body .navbar-brand, 
+.navbar-body .nav-dropdown-item {
+    color: white !important; /* Aplica el color a los enlaces y otros elementos */
+}
+
+/* Para cambiar el color en el dropdown */
+.navbar-body .dropdown-menu {
+    background-color: #78dc44 !important; /* Cambia el fondo del dropdown */
+}
+
+.navbar-body .dropdown-item {
+    color: white !important; /* Cambia el color de las opciones del dropdown */
+}
+
+/* Cambiar el color al pasar el cursor */
+.navbar-body .nav-link:hover, 
+.navbar-body .dropdown-item:hover {
+    color: #000000 !important; /* Color al hacer hover */
+}
+
+/* Cambiar el color al darle click */
+.navbar-body .nav-link:active,
+.navbar-body .dropdown-item:active {
+    color: #000000 !important; /* Color al hacer click */
+}

@@ -1,7 +1,11 @@
+import UpperButtons from '../../components/Main/UpperButtons/UpperButtons.jsx';
+import BodyMain from '../../components/Main/BodyMain/BodyMain.jsx';
+
 function MainPage(){
     return (
         <div>
-            <h1>Main Page</h1>
+            <UpperButtons />
+            <BodyMain />
         </div>
     );
 }

@@ -1,0 +1,36 @@
+.body-main {
+    background-color: #78dc44 !important;
+    font-family: 'Roboto', sans-serif;
+    margin: 4%;
+    margin-top: 0;
+    display: flex;
+    height: 75vh;
+    /* border: 2px solid red; */
+}
+
+.silabo-contenedor {
+    width: 70% !important; 
+    /* border: 2px solid red; */
+}
+
+.semanas-contenedor {
+    color: white !important;
+    width: 30% !important;
+}
+
+li {
+    list-style-type: none;
+    padding: 14px;
+    margin: 0;
+    border-bottom: 2px solid white;
+    cursor: pointer;
+    text-align: right;
+}
+
+li:hover {
+    background-color: #5b9c3e;
+}
+
+.ultima-semana {
+    border-bottom: none;
+}
