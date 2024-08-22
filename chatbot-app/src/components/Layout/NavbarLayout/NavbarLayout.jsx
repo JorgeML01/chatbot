@@ -25,7 +25,7 @@ function NavbarLayout() {
                 Settings
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/">Log out</NavDropdown.Item>
+              <NavDropdown.Item href="/login">Log out</NavDropdown.Item>
             </NavDropdown>
             </Nav>
           </Navbar.Collapse>
