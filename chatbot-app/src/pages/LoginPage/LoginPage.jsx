@@ -24,9 +24,9 @@ function LoginPage() {
         <div className="w-50 form-style">
           <h3>Log In</h3>
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="formBasicUser">
               <Form.Label>User</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Control type="user" placeholder="Enter user" />
               <Form.Text className="text-muted">
               </Form.Text>
             </Form.Group>
