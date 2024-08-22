@@ -8,21 +8,33 @@
     margin-top: 0%;
 }
 
+.form-style {
+    width: 50% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0%;
+}
+
 .button-login {
     background-color: #4CAF50 !important;
     color: white !important;
     padding: 10px 20px !important;
-    margin: 8px 0 !important;
+    margin: 8px auto !important; /* Ajuste automático de márgenes para centrar */
     border: none !important;
     cursor: pointer !important;
-    width: 8% !important;
     opacity: 0.9 !important;
-    align-items: center !important;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    display: block; /* Asegura que el botón se comporte como un bloque */
+    width: 100%; /* Ajusta el ancho para que coincida con el formulario */
 }
 
 .button-login:hover {
     opacity: 1 !important;
+}
+
+.react-social-login-buttons button {
+    display: block;
+    margin: 8px auto; /* Centra el botón de Facebook también */
+    width: 100%; /* Ajusta el ancho para que coincida con el formulario */
 }
