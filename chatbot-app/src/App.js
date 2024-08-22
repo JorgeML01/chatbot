@@ -17,6 +17,7 @@ function App() {
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/settings" element={<SettingsPage/>} />
           <Route path="/chatbot" element={<ChatbotPage/>} />
+          <Route path="/perfil" element={""} />
         </Routes>
       </Router>
     </>
