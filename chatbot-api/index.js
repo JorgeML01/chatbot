@@ -1,11 +1,19 @@
-const express = require('express');
+
+const express = require("express");
 const app = express();
-const port = 3001;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const UserRouter = require("./src/routes/users.route");
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-});
+require("dotenv").config();
+
+app.use(bodyParser.json());
+app.use(express.static(__dirname));
+app.use(cors());
+app.use(cookieParser());
+app.use(UserRouter);
+
+
+app.listen(3001);
