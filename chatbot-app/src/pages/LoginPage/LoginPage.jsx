@@ -47,7 +47,7 @@ function LoginPage() {
 
     try {
       const response = await axios.post(
-        "app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/login",
+        "https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/login",
         {
           email,
           password,
