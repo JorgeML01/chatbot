@@ -1,6 +1,5 @@
 import './styles.css';
-
-import React, { useState } from 'react'; // Asegúrate de importar useState
+import React, { useState } from 'react'; 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
@@ -13,8 +12,8 @@ import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-
 function LoginPage() {
+  const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const [errorMessages, setErrorMessages] = useState({});
   const [email, setEmail] = useState("");
@@ -74,7 +73,6 @@ function LoginPage() {
 
       handleLoginSuccess();
     } catch (error) {
-      // Login error
       if (error.response) {
         if (error.response.status === 400 || error.response.status === 401) {
           setErrorMessages({
@@ -95,6 +93,31 @@ function LoginPage() {
           message: "An error occurred. Please try again.",
         });
       }
+    }
+  };
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      alert("Please select a file first!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+
+    try {
+      const response = await axios.post('https://d303-190-242-25-103.ngrok-free.app/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('File uploaded successfully:', response.data);
+    } catch (error) {
+      console.error('Error uploading file:', error);
     }
   };
 
@@ -122,13 +145,26 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
+
           <Button type="submit" className="button-login">
             Log in
           </Button>
-          <Button type="button" className="button-login">
-            Reconocimiento facial
-          </Button>
         </Form>
+
+        <Form.Group className="mt-3">
+          <Form.Label>Facial Recognition</Form.Label>
+          <Form.Control 
+            type="file" 
+            onChange={handleFileChange}
+          />
+          <Button 
+            type="button" 
+            className="button-login mt-2" 
+            onClick={handleUpload}
+          >
+            Upload Photo
+          </Button>
+        </Form.Group>
 
         {facebookError && <Form.Text className="text-danger">{facebookError}</Form.Text>}
         {googleError && <Form.Text className="text-danger">{googleError}</Form.Text>}
