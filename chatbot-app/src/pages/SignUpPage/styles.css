@@ -1,0 +1,69 @@
+/* General styling for the signup page */
+.signup-body {
+    background-color: #f8f9fa; /* Light grey background for the entire page */
+  }
+  
+  .form-style {
+    background: #fff; /* White background for the form container */
+    padding: 2rem; /* Padding around the form */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow around the form */
+  }
+  
+  /* Form header styling */
+  .form-style h3 {
+    margin-bottom: 1.5rem; /* Space below the header */
+    color: #343a40; /* Darker text color for the header */
+  }
+  
+  /* Styling for form control elements */
+  .form-control {
+    border-radius: 0.25rem; /* Rounded corners for input fields */
+    border-color: #ced4da; /* Light border color */
+    box-shadow: none; /* Remove default shadow */
+  }
+  
+  .form-control:focus {
+    border-color: #80bdff; /* Blue border on focus */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Subtle blue shadow on focus */
+  }
+  
+  /* Styling for form labels */
+  .form-label {
+    font-weight: 500; /* Slightly bolder text */
+    color: #495057; /* Darker color for labels */
+  }
+  
+  /* Styling for form text (error messages) */
+  .text-danger {
+    color: #dc3545; /* Red color for error messages */
+  }
+  
+  /* Button styling */
+  .button-login {
+    background-color: #007bff; /* Blue background color */
+    border: none; /* Remove default border */
+    color: #fff; /* White text color */
+    font-weight: 600; /* Slightly bolder text */
+    padding: 0.5rem 1rem; /* Padding inside the button */
+    border-radius: 0.25rem; /* Rounded corners for the button */
+    margin-top: 1rem; /* Space above the button */
+  }
+  
+  .button-login:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  /* Styling for social login buttons */
+  .social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Space between buttons */
+    margin-top: 1.5rem; /* Space above the social login buttons */
+  }
+  
+  .social-buttons .btn {
+    border-radius: 0.25rem; /* Rounded corners for social buttons */
+  }
+  

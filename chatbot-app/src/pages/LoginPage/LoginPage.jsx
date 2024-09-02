@@ -1,3 +1,5 @@
+import './styles.css';
+
 import React, { useState } from 'react'; // Asegúrate de importar useState
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -11,7 +13,6 @@ import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-import './styles.css';
 
 function LoginPage() {
   const navigate = useNavigate();

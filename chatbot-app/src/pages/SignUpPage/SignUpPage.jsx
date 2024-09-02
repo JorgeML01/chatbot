@@ -10,6 +10,9 @@ import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
 
+import './styles.css';
+
+
 function SignUpPage() {
   const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
@@ -75,7 +78,7 @@ function SignUpPage() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center signup-body" style={{ height: '90vh' }}>
+    <div className="d-flex justify-content-center align-items-center signup-body" style={{ height: '100vh' }}>
       <div className="w-50 form-style">
         <h3>Sign Up</h3>
         <Form onSubmit={handleSubmit}>

@@ -63,8 +63,8 @@ async function login(req, res) {
   try {
     const errorMessages = [];
 
-    if (!isEmail(email)) errorMessages.push("Invalid email");
-    else if (!isPassword(password)) errorMessages.push("Invalid password.");
+    // if (!isEmail(email)) errorMessages.push("Invalid email");
+    // else if (!isPassword(password)) errorMessages.push("Invalid password.");
 
     if (errorMessages.length) {
       res.status(HTTPCodes.BAD_REQUEST).send({ error: errorMessages });
