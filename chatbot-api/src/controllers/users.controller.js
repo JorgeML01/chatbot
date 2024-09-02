@@ -21,7 +21,7 @@ async function register(req, res) {
 
     // Verifies if the email and password are valid.
     // if (!isEmail(email)) errorMessages.push("Invalid email");
-    if (!isPassword(password)) errorMessages.push("Invalid password.");
+    // if (!isPassword(password)) errorMessages.push("Invalid password.");
 
     if (errorMessages.length) {
       res.status(HTTPCodes.BAD_REQUEST).send({ error: errorMessages });

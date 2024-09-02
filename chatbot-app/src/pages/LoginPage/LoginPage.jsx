@@ -18,6 +18,8 @@ function LoginPage() {
   const [errorMessages, setErrorMessages] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [facebookError, setFacebookError] = useState("");
+  const [googleError, setGoogleError] = useState("");
 
   const handleLoginSuccess = () => {
     navigate("/");
@@ -32,6 +34,18 @@ function LoginPage() {
 
   const handleGoogleLoginFailure = (error) => {
     console.log('Google login error:', error);
+    setGoogleError("Google login failed. Please try again.");
+  };
+
+  const handleFacebookLoginSuccess = (response) => {
+    console.log('Facebook login success:', response);
+    navigate("/");
+    window.location.reload();
+  };
+
+  const handleFacebookLoginFailure = (error) => {
+    console.log('Facebook login error:', error);
+    setFacebookError("Facebook login failed. Please try again.");
   };
 
   const handleSubmit = async (event) => {
@@ -71,10 +85,14 @@ function LoginPage() {
         console.error("No se recibió respuesta del servidor...");
         setErrorMessages({
           field: "credentials",
-          message: "Invalid email or password.",
+          message: "No response from server. Please try again.",
         });
       } else {
         console.error("Error al hacer la solicitud:", error.message);
+        setErrorMessages({
+          field: "credentials",
+          message: "An error occurred. Please try again.",
+        });
       }
     }
   };
@@ -111,17 +129,14 @@ function LoginPage() {
           </Button>
         </Form>
 
+        {facebookError && <Form.Text className="text-danger">{facebookError}</Form.Text>}
+        {googleError && <Form.Text className="text-danger">{googleError}</Form.Text>}
+
         {/* Facebook Login Button */}
         <LoginSocialFacebook
           appId="1234585024333167"
-          onResolve={(response) => {
-            console.log('Facebook login success:', response);
-            navigate("/");
-            window.location.reload();
-          }}
-          onReject={(error) => {
-            console.log('Facebook login error:', error);
-          }}
+          onResolve={handleFacebookLoginSuccess}
+          onReject={handleFacebookLoginFailure}
         >
           <FacebookLoginButton />
         </LoginSocialFacebook>

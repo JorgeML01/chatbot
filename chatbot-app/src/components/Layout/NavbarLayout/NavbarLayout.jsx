@@ -27,7 +27,7 @@ function NavbarLayout() {
   function handleLogout() {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
-    navigate("/");
+    navigate("/login");
     window.location.reload();
   }
 
