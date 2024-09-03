@@ -30,7 +30,7 @@ function NavbarLayout() {
 
   async function fetchProfilePic() {
     const userId = jwtDecode(Cookies.get("accessToken")).id;
-    const url = `https://8c30-190-242-25-103.ngrok-free.app/profile-pic/${userId}.jpg`; // Cambia a la URL de producción si es necesario
+    const url = `https://6dfb-190-242-25-103.ngrok-free.app/profile-pic/${userId}.jpg`; // Cambia a la URL de producción si es necesario
 
     try {
       const response = await fetch(url);
