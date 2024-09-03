@@ -100,7 +100,7 @@ function LoginPage() {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleUpload = async () => {
+  const handleCompare = async () => {
     if (!selectedFile) {
       alert("Please select a file first!");
       return;
@@ -110,14 +110,16 @@ function LoginPage() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await axios.post('http://localhost:5000/upload', formData, {
+      const response = await axios.post('https://face-recognition-chatbot-api-1.onrender.com/compare', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('File uploaded successfully:', response.data);
+
+      setComparisonResult(response.data);
+      console.log('Comparison result:', response.data);
     } catch (error) {
-      console.error('Error uploading file:', error);
+      console.error('Error comparing file:', error);
     }
   };
 
@@ -160,7 +162,7 @@ function LoginPage() {
           <Button 
             type="button" 
             className="button-login mt-2" 
-            onClick={handleUpload}
+            onClick={handleCompare}
           >
             Upload Photo
           </Button>
