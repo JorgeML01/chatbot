@@ -13,7 +13,7 @@ import { jwtDecode } from 'jwt-decode';
 function NavbarLayout() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profilePicUrl, setProfilePicUrl] = useState('');
+  const [profilePicUrl, setProfilePicUrl] = useState('/default-profile.png'); // Imagen por defecto
 
   // Define checkLoginStatus as a useCallback to avoid unnecessary effect reruns
   const checkLoginStatus = useCallback(() => {
@@ -30,8 +30,19 @@ function NavbarLayout() {
 
   async function fetchProfilePic() {
     const userId = jwtDecode(Cookies.get("accessToken")).id;
-    //setProfilePicUrl(`http://localhost:5000/profile-pic/${userId}.jpg`);
-    setProfilePicUrl(`https://ff1f-190-242-25-103.ngrok-free.app/profile-pic/${userId}.jpg`);
+    const url = `http://localhost:5000/profile-pic/${userId}.jpg`; // Cambia a la URL de producción si es necesario
+
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        setProfilePicUrl(url); // Imagen disponible
+      } else {
+        setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto si no está disponible
+      }
+    } catch (error) {
+      console.error('Error fetching profile picture:', error);
+      setProfilePicUrl('/default-profile.png'); // Imagen por defecto en caso de error
+    }
   }
 
   function handleLogout() {
@@ -65,7 +76,7 @@ function NavbarLayout() {
           </Nav>
           <Nav>
             {isLoggedIn ? (
-              <NavDropdown title={<img src={profilePicUrl || '/default-profile.png'} alt="Profile" className="profile-pic" />} id="basic-nav-dropdown">
+              <NavDropdown title={<img src={profilePicUrl} alt="Profile" className="profile-pic" />} id="basic-nav-dropdown">
                 <NavDropdown.Item href="perfil">Perfil</NavDropdown.Item>
                 <NavDropdown.Item href="settings">
                   Settings
