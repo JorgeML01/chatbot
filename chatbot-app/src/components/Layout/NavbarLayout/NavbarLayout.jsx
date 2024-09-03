@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
 function NavbarLayout() {
@@ -15,7 +15,8 @@ function NavbarLayout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profilePicUrl, setProfilePicUrl] = useState('');
 
-  function checkLoginStatus() {
+  // Define checkLoginStatus as a useCallback to avoid unnecessary effect reruns
+  const checkLoginStatus = useCallback(() => {
     const accessToken = Cookies.get("accessToken");
     const refreshToken = Cookies.get("refreshToken");
     
@@ -25,7 +26,7 @@ function NavbarLayout() {
     } else {
       setIsLoggedIn(false);
     }
-  }
+  }, []);
 
   async function fetchProfilePic() {
     const userId = jwtDecode(Cookies.get("accessToken")).id;
@@ -41,7 +42,7 @@ function NavbarLayout() {
 
   useEffect(() => {
     checkLoginStatus();
-  }, []);
+  }, [checkLoginStatus]); // Include checkLoginStatus in dependencies array
 
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary navbar-body sticky-top">
