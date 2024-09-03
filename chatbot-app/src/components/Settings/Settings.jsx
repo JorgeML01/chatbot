@@ -45,7 +45,7 @@ function Settings() {
         formData.append("userId", userId); // Enviar el ID del usuario
 
         try {
-            const response = await axios.post('http://localhost:5000/upload', formData, {
+            const response = await axios.post('https://face-recognition-chatbot-api-1.onrender.com/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
