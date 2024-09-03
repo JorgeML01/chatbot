@@ -20,12 +20,13 @@ function Profile() {
                 setEmail(decodedToken ? decodedToken.email : 'Email');
 
                 // Intentar cargar la imagen del perfil
-                const profilePicUrl = `https://divine-pheasant-exactly.ngrok-free.app/profile-pic/${userId}.jpg`;
-                
+                const profilePicUrl = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`;
+                // const profilePicUrl = `http://localhost:5000/profile-pic/${userId}.jpg`;
+
                 fetch(profilePicUrl, {
                     method: "get",
                     headers: new Headers({
-                        "ngrok-skip-browser-warning": "69420",
+                        "ngrok-skip-browser-warning": "true",
                     }),
                 })
                 .then(response => {

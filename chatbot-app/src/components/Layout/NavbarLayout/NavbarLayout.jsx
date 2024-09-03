@@ -30,13 +30,15 @@ function NavbarLayout() {
 
   async function fetchProfilePic() {
     const userId = jwtDecode(Cookies.get("accessToken")).id;
-    const url = `https://divine-pheasant-exactly.ngrok-free.app/profile-pic/${userId}.jpg`; // URL de Ngrok
+    const url = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`; // URL de Ngrok
+    // const url = `http://localhost:5000/profile-pic/${userId}.jpg`;
+
 
     try {
       const response = await fetch(url, {
         method: "get",
         headers: new Headers({
-          "ngrok-skip-browser-warning": "69420",
+          "ngrok-skip-browser-warning": "false",
         }),
       });
 
