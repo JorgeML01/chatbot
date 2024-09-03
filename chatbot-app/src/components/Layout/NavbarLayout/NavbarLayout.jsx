@@ -18,14 +18,8 @@ function NavbarLayout() {
   function checkLoginStatus() {
     const accessToken = Cookies.get("accessToken");
     const refreshToken = Cookies.get("refreshToken");
-    const decodedToken = "";
     
     if (accessToken && refreshToken) {
-      try {
-        decodedToken = jwtDecode(accessToken);
-      } catch (error) {
-        console.error("Error decoding token:", error);
-      }
       setIsLoggedIn(true);
       fetchProfilePic();
     } else {
