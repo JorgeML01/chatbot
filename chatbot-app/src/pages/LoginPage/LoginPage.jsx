@@ -13,6 +13,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function LoginPage() {
+  const [comparisonResult, setComparisonResult] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const [errorMessages, setErrorMessages] = useState({});
