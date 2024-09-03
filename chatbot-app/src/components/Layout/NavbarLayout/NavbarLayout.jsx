@@ -30,14 +30,20 @@ function NavbarLayout() {
 
   async function fetchProfilePic() {
     const userId = jwtDecode(Cookies.get("accessToken")).id;
-    const url = `https://6dfb-190-242-25-103.ngrok-free.app/profile-pic/${userId}.jpg`; // Cambia a la URL de producción si es necesario
+    const url = `https://divine-pheasant-exactly.ngrok-free.app/profile-pic/${userId}.jpg`; // URL de Ngrok
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        method: "get",
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+      });
+
       if (response.ok) {
         setProfilePicUrl(url); // Imagen disponible
       } else {
-        setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto si no está disponible
+        setProfilePicUrl('/default-profile.png'); // Imagen por defecto si no está disponible
       }
     } catch (error) {
       console.error('Error fetching profile picture:', error);

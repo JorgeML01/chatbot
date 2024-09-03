@@ -20,19 +20,24 @@ function Profile() {
                 setEmail(decodedToken ? decodedToken.email : 'Email');
 
                 // Intentar cargar la imagen del perfil
-                const profilePicUrl = `https://6dfb-190-242-25-103.ngrok-free.app/profile-pic/${userId}.jpg`;
+                const profilePicUrl = `https://divine-pheasant-exactly.ngrok-free.app/profile-pic/${userId}.jpg`;
                 
-                fetch(profilePicUrl)
-                    .then(response => {
-                        if (response.ok) {
-                            setProfilePicUrl(profilePicUrl); // Imagen disponible
-                        } else {
-                            setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto
-                        }
-                    })
-                    .catch(() => {
-                        setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto en caso de error
-                    });
+                fetch(profilePicUrl, {
+                    method: "get",
+                    headers: new Headers({
+                        "ngrok-skip-browser-warning": "69420",
+                    }),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        setProfilePicUrl(profilePicUrl); // Imagen disponible
+                    } else {
+                        setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto
+                    }
+                })
+                .catch(() => {
+                    setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto en caso de error
+                });
 
             } catch (error) {
                 console.error("Error decoding token:", error);
