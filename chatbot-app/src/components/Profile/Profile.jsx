@@ -20,7 +20,7 @@ function Profile() {
                 setEmail(decodedToken ? decodedToken.email : 'Email');
 
                 // Intentar cargar la imagen del perfil
-                const profilePicUrl = `https://d0bc-190-242-25-103.ngrok-free.app/profile-pic/${userId}.jpg`;
+                const profilePicUrl = `https://8c30-190-242-25-103.ngrok-free.app/profile-pic/${userId}.jpg`;
                 
                 fetch(profilePicUrl)
                     .then(response => {
