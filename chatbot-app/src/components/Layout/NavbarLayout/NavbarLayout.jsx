@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import axios from 'axios';
 
 function NavbarLayout() {
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ function NavbarLayout() {
   function checkLoginStatus() {
     const accessToken = Cookies.get("accessToken");
     const refreshToken = Cookies.get("refreshToken");
-    let decodedToken = "";
+    const decodedToken = "";
     
     if (accessToken && refreshToken) {
       try {
