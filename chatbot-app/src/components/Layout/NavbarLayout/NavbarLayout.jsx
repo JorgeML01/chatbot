@@ -8,6 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 
 function NavbarLayout() {
@@ -18,8 +19,14 @@ function NavbarLayout() {
   function checkLoginStatus() {
     const accessToken = Cookies.get("accessToken");
     const refreshToken = Cookies.get("refreshToken");
-
+    let decodedToken = "";
+    
     if (accessToken && refreshToken) {
+      try {
+        decodedToken = jwtDecode(accessToken);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
       setIsLoggedIn(true);
       fetchProfilePic();
     } else {
@@ -28,7 +35,7 @@ function NavbarLayout() {
   }
 
   async function fetchProfilePic() {
-    const userId = '5'; // Debes obtener el ID del usuario real
+    const userId = jwtDecode(Cookies.get("accessToken")).id;
     setProfilePicUrl(`http://localhost:5000/profile-pic/${userId}.jpg`);
   }
 

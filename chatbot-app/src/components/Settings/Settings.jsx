@@ -27,9 +27,11 @@ function Settings() {
     }
 
     const [userId, setUserId] = useState(decodedToken ? decodedToken.id : "");
+
     const handleUpload = async () => {
         if (!selectedFile) {
           alert("Please select a file first!");
+          setUserId(decodedToken ? decodedToken.id : "");
           return;
         }
     
