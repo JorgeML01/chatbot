@@ -110,7 +110,7 @@ function LoginPage() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await axios.post('https://d303-190-242-25-103.ngrok-free.app/upload', formData, {
+      const response = await axios.post('http://localhost:5000/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

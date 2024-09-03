@@ -1,11 +1,7 @@
 .navbar-body {
     background-color: #78dc44 !important;
     color: white !important; /* Cambia este valor por el color que prefieras */
-    font-family: 'Roboto', sans-serif;
-
-
-
-    
+    font-family: 'Roboto', sans-serif;    
     /* Bottom color */
     border-bottom: 2px solid #78dc44 !important; /* Cambia el color del borde inferior */
 }
@@ -37,3 +33,11 @@
 .navbar-body .dropdown-item:active {
     color: #000000 !important; /* Color al hacer click */
 }
+
+.profile-pic {
+    width: 40px; /* Ajusta el tamaño según sea necesario */
+    height: 40px; /* Ajusta el tamaño según sea necesario */
+    border-radius: 50%; /* Hace que la imagen sea circular */
+    object-fit: cover; /* Ajusta la imagen para cubrir el área del contenedor */
+  }
+  

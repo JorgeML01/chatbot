@@ -8,10 +8,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function NavbarLayout() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profilePicUrl, setProfilePicUrl] = useState('');
 
   function checkLoginStatus() {
     const accessToken = Cookies.get("accessToken");
@@ -19,9 +21,15 @@ function NavbarLayout() {
 
     if (accessToken && refreshToken) {
       setIsLoggedIn(true);
+      fetchProfilePic();
     } else {
       setIsLoggedIn(false);
     }
+  }
+
+  async function fetchProfilePic() {
+    const userId = '5'; // Debes obtener el ID del usuario real
+    setProfilePicUrl(`http://localhost:5000/profile-pic/${userId}.jpg`);
   }
 
   function handleLogout() {
@@ -55,7 +63,7 @@ function NavbarLayout() {
           </Nav>
           <Nav>
             {isLoggedIn ? (
-              <NavDropdown title="Perfil" id="basic-nav-dropdown">
+              <NavDropdown title={<img src={profilePicUrl || '/default-profile.png'} alt="Profile" className="profile-pic" />} id="basic-nav-dropdown">
                 <NavDropdown.Item href="perfil">Perfil</NavDropdown.Item>
                 <NavDropdown.Item href="settings">
                   Settings
