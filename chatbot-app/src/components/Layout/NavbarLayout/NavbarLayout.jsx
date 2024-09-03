@@ -30,7 +30,8 @@ function NavbarLayout() {
 
   async function fetchProfilePic() {
     const userId = jwtDecode(Cookies.get("accessToken")).id;
-    setProfilePicUrl(`http://localhost:5000/profile-pic/${userId}.jpg`);
+    //setProfilePicUrl(`http://localhost:5000/profile-pic/${userId}.jpg`);
+    setProfilePicUrl(`https://ff1f-190-242-25-103.ngrok-free.app/profile-pic/${userId}.jpg`);
   }
 
   function handleLogout() {

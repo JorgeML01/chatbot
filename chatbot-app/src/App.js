@@ -3,6 +3,7 @@ import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import SettingsPage from "./pages/SettingsPage";
 import SignUpPage from "./pages/SignUpPage";
+import ProfilePage from "./pages/ProfilePage";
 import NavbarLayout from "./components/Layout/NavbarLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -17,7 +18,7 @@ function App() {
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/settings" element={<SettingsPage/>} />
           <Route path="/chatbot" element={<ChatbotPage/>} />
-          <Route path="/perfil" element={""} />
+          <Route path="/perfil" element={<ProfilePage/>} />
         </Routes>
       </Router>
     </>
