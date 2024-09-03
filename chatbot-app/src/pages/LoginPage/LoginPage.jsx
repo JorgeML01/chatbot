@@ -165,9 +165,17 @@ function LoginPage() {
             className="button-login mt-2" 
             onClick={handleCompare}
           >
-            Upload Photo
+            Compare Photo
           </Button>
         </Form.Group>
+
+        {comparisonResult && (
+          <div className="mt-3">
+            <h5>Comparison Result:</h5>
+            <p>{comparisonResult.message}</p>
+            {comparisonResult.match && <p>Matching photo: {comparisonResult.match}</p>}
+          </div>
+        )}
 
         {facebookError && <Form.Text className="text-danger">{facebookError}</Form.Text>}
         {googleError && <Form.Text className="text-danger">{googleError}</Form.Text>}
