@@ -10,7 +10,7 @@
 
 .button-main {
     font-family: 'Roboto', sans-serif;
-    background-color: #78dc44 !important;
+    background-color: #03318C !important;
     color: rgb(255, 255, 255) !important;
     display: flex;
     align-items: center;
@@ -19,6 +19,6 @@
 }
 
 .button-main:hover {
-    background-color: #5cbf2a !important;
+    background-color: #3999BF !important;
     color: rgb(255, 255, 255) !important;
 }

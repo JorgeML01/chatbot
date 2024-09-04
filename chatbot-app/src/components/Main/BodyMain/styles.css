@@ -1,5 +1,5 @@
 .body-main {
-    background-color: #78dc44 !important;
+    background-color: #03318C!important;
     font-family: 'Roboto', sans-serif;
     margin: 4%;
     margin-top: 0;
@@ -28,7 +28,7 @@ li {
 }
 
 li:hover {
-    background-color: #5b9c3e;
+    background-color: #3999BF;
 }
 
 .ultima-semana {

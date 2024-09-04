@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles.css';
+import './navbar.css';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -15,7 +15,6 @@ function NavbarLayout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profilePicUrl, setProfilePicUrl] = useState('/default-profile.png'); // Imagen por defecto
 
-  // Define checkLoginStatus as a useCallback to avoid unnecessary effect reruns
   const checkLoginStatus = useCallback(() => {
     const accessToken = Cookies.get("accessToken");
     const refreshToken = Cookies.get("refreshToken");
@@ -32,7 +31,6 @@ function NavbarLayout() {
     const userId = jwtDecode(Cookies.get("accessToken")).id;
     const url = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`; // URL de Ngrok
     // const url = `http://localhost:5000/profile-pic/${userId}.jpg`;
-
 
     try {
       const response = await fetch(url, {
@@ -62,12 +60,17 @@ function NavbarLayout() {
 
   useEffect(() => {
     checkLoginStatus();
-  }, [checkLoginStatus]); // Include checkLoginStatus in dependencies array
+  }, [checkLoginStatus]);
 
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary navbar-body sticky-top">
       <Container>
-        <Navbar.Brand href="/">SIL-CHATBOT</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src="/6.png" alt="Logo" className="navbar-logo" /> {/* Añade esta línea */}
+          <title-nav className="title-style">
+           SIL-CHATBOT
+          </title-nav>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -86,13 +89,9 @@ function NavbarLayout() {
             {isLoggedIn ? (
               <NavDropdown title={<img src={profilePicUrl} alt="Profile" className="profile-pic" />} id="basic-nav-dropdown">
                 <NavDropdown.Item href="perfil">Perfil</NavDropdown.Item>
-                <NavDropdown.Item href="settings">
-                  Settings
-                </NavDropdown.Item>
+                <NavDropdown.Item href="settings">Settings</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogout}>
-                  Log out
-                </NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item>
               </NavDropdown>
             ) : (
               <></>

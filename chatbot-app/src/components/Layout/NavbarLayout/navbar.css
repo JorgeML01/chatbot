@@ -1,9 +1,9 @@
 .navbar-body {
-    background-color: #78dc44 !important;
+    background-color: #03318C !important;
     color: white !important; /* Cambia este valor por el color que prefieras */
     font-family: 'Roboto', sans-serif;    
     /* Bottom color */
-    border-bottom: 2px solid #78dc44 !important; /* Cambia el color del borde inferior */
+    border-bottom: 2px solid #03318C !important; /* Cambia el color del borde inferior */
 }
 
 /* Si quieres cambiar específicamente el color de los enlaces */
@@ -15,7 +15,7 @@
 
 /* Para cambiar el color en el dropdown */
 .navbar-body .dropdown-menu {
-    background-color: #78dc44 !important; /* Cambia el fondo del dropdown */
+    background-color: #03318C!important; /* Cambia el fondo del dropdown */
 }
 
 .navbar-body .dropdown-item {
@@ -40,4 +40,25 @@
     border-radius: 50%; /* Hace que la imagen sea circular */
     object-fit: cover; /* Ajusta la imagen para cubrir el área del contenedor */
   }
+  
+/* styles.css */
+.navbar-logo {
+    height: 40px; /* Ajusta el tamaño aquí */
+    width: auto;
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+  }
+  
+  .profile-pic {
+    height: 32px; /* Ajusta la altura según sea necesario */
+    width: 32px; /* Ajusta la altura según sea necesario */
+    border-radius: 50%; /* Hace la imagen circular */
+  }
+  
+.title-style {
+    margin-top: 10px !important; /* Ajusta este valor según sea necesario */
+    font-size: 10px;
+    font-weight: bold;
+    color: white !important; /* Puedes cambiar el color si es necesario */
+    display: block;
+}
   
