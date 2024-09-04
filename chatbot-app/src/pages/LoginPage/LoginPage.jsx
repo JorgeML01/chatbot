@@ -1,16 +1,13 @@
+import React, { useState } from 'react';
 import './styles.css';
-import React, { useState } from 'react'; 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Cookies from "js-cookie";
-
-// Facebook and Google buttons
-import { LoginSocialFacebook } from "reactjs-social-login";
-import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { LoginSocialFacebook } from "reactjs-social-login";
+import { FacebookLoginButton } from "react-social-login-buttons";
 
 function LoginPage() {
   const [comparisonResult, setComparisonResult] = useState(null);
@@ -61,39 +58,34 @@ function LoginPage() {
     }
 
     try {
-      const response = await axios.post(
-        "https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/login",
-        {
+      const response = await fetch("https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           email,
           password,
-        }
-      );
+        }),
+      });
 
-      Cookies.set("accessToken", response.data.data.accessToken);
-      Cookies.set("refreshToken", response.data.data.refreshToken);
-
-      handleLoginSuccess();
-    } catch (error) {
-      if (error.response) {
-        if (error.response.status === 400 || error.response.status === 401) {
-          setErrorMessages({
-            field: "credentials",
-            message: "Invalid email or password.",
-          });
-        }
-      } else if (error.request) {
-        console.error("No se recibió respuesta del servidor...");
-        setErrorMessages({
-          field: "credentials",
-          message: "No response from server. Please try again.",
-        });
+      if (response.ok) {
+        const data = await response.json();
+        Cookies.set("accessToken", data.data.accessToken);
+        Cookies.set("refreshToken", data.data.refreshToken);
+        handleLoginSuccess();
       } else {
-        console.error("Error al hacer la solicitud:", error.message);
         setErrorMessages({
           field: "credentials",
-          message: "An error occurred. Please try again.",
+          message: "Invalid email or password.",
         });
       }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setErrorMessages({
+        field: "credentials",
+        message: "An error occurred. Please try again.",
+      });
     }
   };
 
@@ -111,14 +103,20 @@ function LoginPage() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await axios.post('https://face-recognition-chatbot-api-1.onrender.com/compare', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      // https://face-recognition-chatbot-api-1.onrender.com/compare
+      const response = await fetch('https://face-recognition-chatbot-api-1.onrender.com/compare', {
+        //mode: 'no-cors',
+        method: 'POST',
+        body: formData,
       });
 
-      setComparisonResult(response.data);
-      console.log('Comparison result:', response.data);
+      if (response.ok) {
+        const data = await response.json();
+        setComparisonResult(data);
+        console.log('Comparison result:', data);
+      } else {
+        console.error('Error comparing file:', response.statusText);
+      }
     } catch (error) {
       console.error('Error comparing file:', error);
     }

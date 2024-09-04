@@ -47,7 +47,7 @@ function Settings() {
         try {
             const response = await axios.post('https://face-recognition-chatbot-api-1.onrender.com/upload', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    // 'Content-Type': 'multipart/form-data',
                 },
             });
             console.log('File uploaded successfully:', response.data);
