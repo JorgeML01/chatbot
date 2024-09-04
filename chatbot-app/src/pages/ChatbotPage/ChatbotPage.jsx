@@ -37,7 +37,7 @@ const Chatbot = () => {
           onChange={(e) => setInputMessage(e.target.value)}
           className="message-input"
         />
-        <Button variant="success" onClick={handleSendMessage} className="send-button">
+        <Button variant="" onClick={handleSendMessage} className="send-button">
           Enviar
         </Button>
       </Form.Group>
