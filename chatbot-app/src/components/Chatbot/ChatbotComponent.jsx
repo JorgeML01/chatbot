@@ -35,10 +35,11 @@ const ChatbotComponent = () => {
             left: 50%; /* Coloca el chatbot al 50% del ancho de la pantalla */
             transform: translateX(-50%); /* Mueve el chatbot hacia la izquierda para centrarlo */
             width: 1000px; /* Ancho del chatbot */
+            height: 630px; /* Altura fija del chatbot */
+            overflow-y: auto; /* Habilita el desplazamiento vertical para los mensajes */
           }
         `}
       </style>
-
     </div>
   );
 };
