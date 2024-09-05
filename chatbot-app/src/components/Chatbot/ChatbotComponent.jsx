@@ -32,12 +32,12 @@ const ChatbotComponent = () => {
             --df-messenger-chat-background: #f3f6fc;
             --df-messenger-message-user-background: #d3e3fd;
             --df-messenger-message-bot-background: #fff;
-            bottom: 0;
+            bottom: 2%;
             left: 50%; /* Coloca el chatbot al 50% del ancho de la pantalla */
             transform: translateX(-50%); /* Mueve el chatbot hacia la izquierda para centrarlo */
             width: 1000px; /* Ancho del chatbot */
-            height: 630px; /* Altura fija del chatbot */
-            overflow-y: auto; /* Habilita el desplazamiento vertical para los mensajes */
+            height: 600px; /* Altura fija del chatbot */
+            
           }
         `}
       </style>
