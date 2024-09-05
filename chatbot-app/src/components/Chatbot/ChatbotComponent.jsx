@@ -16,6 +16,7 @@ const ChatbotComponent = () => {
         agent-id="916068a5-3bf0-4557-a258-22aad662c891"
         language-code="es"
         max-query-length="-1"
+        storage-option="none"
       >
         <df-messenger-chat chat-title="Sil-Bot"></df-messenger-chat>
       </df-messenger>
