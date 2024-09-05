@@ -68,7 +68,7 @@ function NavbarLayout() {
         <Navbar.Brand href="/">
           <img src="/6.png" alt="Logo" className="navbar-logo" /> {/* Añade esta línea */}
           <title-nav className="title-style">
-           SIL-CHATBOT
+           Sil-Chatbot
           </title-nav>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
