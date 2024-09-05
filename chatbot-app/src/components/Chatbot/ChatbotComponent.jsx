@@ -17,7 +17,7 @@ const ChatbotComponent = () => {
         language-code="es"
         max-query-length="-1"
       >
-        <df-messenger-chat chat-title="CHATBOT-ES-RAG"></df-messenger-chat>
+        <df-messenger-chat chat-title="Sil-Bot"></df-messenger-chat>
       </df-messenger>
 
       {/* Inline styling para el chatbot */}
