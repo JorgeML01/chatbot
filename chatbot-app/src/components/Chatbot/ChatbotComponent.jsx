@@ -6,7 +6,6 @@ const ChatbotComponent = () => {
   const [responses, setResponses] = useState([]); // Array de respuestas
   const [loading, setLoading] = useState(false);
 
-
   // Referencia para el contenedor del chat, nos ayudará a anclar al final del chat
   const chatWindowRef = useRef(null);
 
@@ -17,7 +16,7 @@ const ChatbotComponent = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/detectIntent', {
+      const res = await fetch('https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/detectIntent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
