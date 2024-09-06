@@ -5,9 +5,7 @@ const ChatbotComponent = () => {
   const [query, setQuery] = useState('');
   const [responses, setResponses] = useState([]); // Array de respuestas
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  
-  error = null;
+
 
   // Referencia para el contenedor del chat, nos ayudará a anclar al final del chat
   const chatWindowRef = useRef(null);
@@ -17,7 +15,6 @@ const ChatbotComponent = () => {
     if (!query) return;
 
     setLoading(true);
-    setError(null);
 
     try {
       const res = await fetch('app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/detectIntent', {
@@ -45,7 +42,6 @@ const ChatbotComponent = () => {
       ]);
       setQuery(''); // Limpiar el campo de texto después de enviar
     } catch (err) {
-      setError('Error al obtener la respuesta del chatbot.');
       console.error(err);
     }
 
