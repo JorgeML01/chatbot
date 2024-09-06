@@ -1,0 +1,75 @@
+/* Estilo del contenedor principal */
+.chatbot-container {
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo para el título del chatbot */
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Ventana de chat con scroll */
+  .chatWindow {
+    flex-grow: 1;
+    overflow-y: auto; /* Permitir scroll vertical */
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    max-height: 500px; /* Limitar la altura máxima */
+  }
+  
+  /* Lista de respuestas */
+  .responseList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre respuestas */
+  }
+  
+  /* Estilo para la respuesta del chatbot */
+  .responseContainer {
+    background-color: #e6e6e6;
+    padding: 12px;
+    border-radius: 5px;
+    color: #333;
+  }
+  
+  /* Estilo para el input y el botón */
+  input {
+    width: calc(100% - 90px);
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+  
+  button {
+    padding: 12px 20px;
+    border-radius: 5px;
+    background-color: #03318C;
+    color: white;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  /* Hover en el botón */
+  button:hover {
+    background-color: #3999BF;
+  }
+  

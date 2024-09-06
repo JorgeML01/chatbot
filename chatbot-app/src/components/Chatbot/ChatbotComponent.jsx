@@ -1,46 +1,96 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React, { useState, useRef, useEffect } from 'react';
+import './ChatbotComponent.css';
 
 const ChatbotComponent = () => {
+  const [query, setQuery] = useState('');
+  const [responses, setResponses] = useState([]); // Array de respuestas
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Referencia para el contenedor del chat, nos ayudará a anclar al final del chat
+  const chatWindowRef = useRef(null);
+
+  // Función para enviar el mensaje
+  const handleSend = async () => {
+    if (!query) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch('app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/detectIntent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: query,
+          sessionId: 'user-session-1',
+          languageCode: 'es',
+        }),
+      });
+
+      const data = await res.json();
+      setResponses((prevResponses) => [
+        ...prevResponses,
+        {
+          query: query,
+          agentResponse: data.agentResponse,
+          matchedIntent: data.matchedIntent,
+          currentPage: data.currentPage,
+          sentiment: data.sentiment,
+        },
+      ]);
+      setQuery(''); // Limpiar el campo de texto después de enviar
+    } catch (err) {
+      setError('Error al obtener la respuesta del chatbot.');
+      console.error(err);
+    }
+
+    setLoading(false); // Dejar de mostrar "Escribiendo..."
+  };
+
+  // Función para manejar el evento 'Enter'
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSend();
+    }
+  };
+
+  // Desplazar el chat hacia abajo automáticamente cuando cambian las respuestas
+  useEffect(() => {
+    if (chatWindowRef.current) {
+      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+    }
+  }, [responses, loading]); // Ejecuta este efecto cada vez que cambien las respuestas o el estado de loading
+
   return (
-    <div>
-      {/* Helmet para incluir los scripts y estilos */}
-      <Helmet>
-        <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css" />
-        <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-      </Helmet>
-
-      {/* df-messenger */}
-      <df-messenger
-        project-id="chatbot-app-433407"
-        agent-id="916068a5-3bf0-4557-a258-22aad662c891"
-        language-code="es"
-        max-query-length="-1"
-        storage-option="none"
-      >
-        <df-messenger-chat chat-title="Sil-Bot"></df-messenger-chat>
-      </df-messenger>
-
-      {/* Inline styling para el chatbot */}
-      <style>
-        {`
-          df-messenger {
-            z-index: 999;
-            position: fixed;
-            --df-messenger-font-color: #000;
-            --df-messenger-font-family: Google Sans;
-            --df-messenger-chat-background: #f3f6fc;
-            --df-messenger-message-user-background: #d3e3fd;
-            --df-messenger-message-bot-background: #fff;
-            bottom: 2%;
-            left: 50%; /* Coloca el chatbot al 50% del ancho de la pantalla */
-            transform: translateX(-50%); /* Mueve el chatbot hacia la izquierda para centrarlo */
-            width: 1000px; /* Ancho del chatbot */
-            height: 600px; /* Altura fija del chatbot */
-            
-          }
-        `}
-      </style>
+    <div className="chatbot-container">
+      <h2>Chatbot</h2>
+      <div className="chatWindow" ref={chatWindowRef}>
+        <div className="responseList">
+          {responses.length === 0 && <p>No hay respuesta aún. Escribe algo para empezar.</p>}
+          {responses.map((response, index) => (
+            <div key={index} className="responseContainer">
+              <p><strong>Tu mensaje:</strong> {response.query}</p>
+              <p><strong>Respuesta del Agente:</strong> {response.agentResponse}</p>
+              <p><strong>Intento Detectado:</strong> {response.matchedIntent}</p>
+              <p><strong>Página Actual:</strong> {response.currentPage}</p>
+              <p><strong>Análisis de Sentimiento:</strong> Score: {response.sentiment.score}, Magnitude: {response.sentiment.magnitude}</p>
+            </div>
+          ))}
+        </div>
+        {/* Mostrar "Escribiendo..." al final mientras carga */}
+        {loading && <p className="typingIndicator">Escribiendo...</p>}
+      </div>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyPress={handleKeyPress} // Enviar con Enter
+        placeholder="Escribe tu mensaje"
+      />
+      <button onClick={handleSend}>Enviar</button>
     </div>
   );
 };
