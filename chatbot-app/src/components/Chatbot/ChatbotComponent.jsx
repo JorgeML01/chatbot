@@ -6,6 +6,8 @@ const ChatbotComponent = () => {
   const [responses, setResponses] = useState([]); // Array de respuestas
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  
+  error = null;
 
   // Referencia para el contenedor del chat, nos ayudará a anclar al final del chat
   const chatWindowRef = useRef(null);
