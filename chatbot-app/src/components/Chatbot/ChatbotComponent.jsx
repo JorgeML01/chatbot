@@ -59,35 +59,42 @@ const ChatbotComponent = () => {
     if (chatWindowRef.current) {
       chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
     }
-  }, [responses, loading]); // Ejecuta este efecto cada vez que cambien las respuestas o el estado de loading
+  }, [responses]); // Solo desplazar cuando cambien las respuestas, no cuando esté escribiendo
 
   return (
     <div className="chatbot-container">
-      <h2>Chatbot</h2>
+      <h2>Sil-Chatbot</h2>
       <div className="chatWindow" ref={chatWindowRef}>
         <div className="responseList">
           {responses.length === 0 && <p>No hay respuesta aún. Escribe algo para empezar.</p>}
           {responses.map((response, index) => (
             <div key={index} className="responseContainer">
-              <p><strong>Tu mensaje:</strong> {response.query}</p>
-              <p><strong>Respuesta del Agente:</strong> {response.agentResponse}</p>
-              <p><strong>Intento Detectado:</strong> {response.matchedIntent}</p>
-              <p><strong>Página Actual:</strong> {response.currentPage}</p>
-              <p><strong>Análisis de Sentimiento:</strong> Score: {response.sentiment.score}, Magnitude: {response.sentiment.magnitude}</p>
+              <div className="userMessage">
+                <p><strong>Tú:</strong> {response.query}</p>
+              </div>
+              <div className="botResponse">
+                <p><strong>Sil-Bot:</strong> {response.agentResponse}</p>
+              </div>
             </div>
           ))}
         </div>
-        {/* Mostrar "Escribiendo..." al final mientras carga */}
-        {loading && <p className="typingIndicator">Escribiendo...</p>}
       </div>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyPress={handleKeyPress} // Enviar con Enter
-        placeholder="Escribe tu mensaje"
-      />
-      <button onClick={handleSend}>Enviar</button>
+      {/* Sección fija en la parte inferior */}
+      <div className="bottomSection">
+        {responses.length > 0 && (
+          <div className="sentiment">
+            <p><strong>Análisis de Sentimiento:</strong> {responses[responses.length - 1].sentiment.score > 0 ? 'Positivo' : 'Negativo'}</p>
+          </div>
+        )}
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyPress={handleKeyPress} // Enviar con Enter
+          placeholder="Escribe tu mensaje"
+        />
+        <button onClick={handleSend}>Enviar</button>
+      </div>
     </div>
   );
 };
