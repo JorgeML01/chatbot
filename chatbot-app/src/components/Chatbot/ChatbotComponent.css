@@ -9,7 +9,6 @@
   padding: 20px;
   margin: 0 auto;
   background-color: #f4f4f4;
-
 }
 
 .chatWindow {
@@ -22,17 +21,19 @@
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+  position: relative; /* Para permitir el posicionamiento absoluto del indicador de "Escribiendo..." */
 }
 
 .typingIndicatorInsideChat {
-  bottom: 10px; /* 10px desde la parte inferior del chatwindow */
-  left: 10px; /* 10px desde la parte izquierda del chatwindow */
+  position: fixed; /* Cambiar a fixed para que se mantenga en la parte inferior */
+  bottom: 20px;    /* Asegura que esté siempre en la parte inferior */
+  left: 20px;
   color: #888;
   font-style: italic;
   font-size: 14px;
-  z-index: 1; /* Asegura que sea visible, pero dentro del chat */
+  z-index: 1;      /* Asegura que esté por encima del contenido */
 }
+
 
 .responseContainer {
   display: flex;
@@ -65,13 +66,6 @@
   padding-top: 10px;
   background-color: #f4f4f4;
   border-top: 1px solid #ddd;
-}
-
-.typingIndicator {
-  text-align: center;
-  color: #888;
-  font-style: italic;
-  margin-top: 5px; /* Un margen ligero para separarlo de los demás elementos */
 }
 
 input[type="text"] {
@@ -108,7 +102,7 @@ button:hover {
   .chatWindow {
     width: 90%;
     height: 250px;
-    padding-bottom: 30px; /* Ajustar el padding para el indicador en pantallas pequeñas */
+    padding-bottom: 30px;
   }
 
   .typingIndicatorInsideChat {
@@ -119,7 +113,7 @@ button:hover {
 @media screen and (max-width: 480px) {
   .chatWindow {
     height: 200px;
-    padding-bottom: 30px; /* Ajustar el padding para el indicador en pantallas más pequeñas */
+    padding-bottom: 30px;
   }
 
   .typingIndicatorInsideChat {

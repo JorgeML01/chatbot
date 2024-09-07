@@ -5,6 +5,7 @@ const ChatbotComponent = () => {
   const [query, setQuery] = useState('');
   const [responses, setResponses] = useState([]); // Array de respuestas
   const [loading, setLoading] = useState(false);
+  const [typing, setTyping] = useState(false); // Nuevo estado para "Escribiendo..."
 
   // Referencia para el contenedor del chat, nos ayudará a anclar al final del chat
   const chatWindowRef = useRef(null);
@@ -14,6 +15,7 @@ const ChatbotComponent = () => {
     if (!query) return;
 
     setLoading(true);
+    setTyping(true); // Mostrar "Escribiendo..."
 
     try {
       const res = await fetch('https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/detectIntent', {
@@ -45,6 +47,7 @@ const ChatbotComponent = () => {
     }
 
     setLoading(false); // Dejar de mostrar "Escribiendo..."
+    setTyping(false);  // Ocultar "Escribiendo..."
   };
 
   // Función para manejar el evento 'Enter'
@@ -59,7 +62,7 @@ const ChatbotComponent = () => {
     if (chatWindowRef.current) {
       chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
     }
-  }, [responses]); // Solo desplazar cuando cambien las respuestas, no cuando esté escribiendo
+  }, [responses]); // Solo desplazar cuando cambien las respuestas
 
   return (
     <div className="chatbot-container">
@@ -78,6 +81,7 @@ const ChatbotComponent = () => {
             </div>
           ))}
         </div>
+        {typing && <p className="typingIndicatorInsideChat">Escribiendo...</p>}
       </div>
       <div className="bottomSection">
         {responses.length > 0 && (
@@ -96,7 +100,6 @@ const ChatbotComponent = () => {
       </div>
     </div>
   );
-  
 };
 
 export default ChatbotComponent;
