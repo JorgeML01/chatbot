@@ -4,7 +4,6 @@ import './ChatbotComponent.css';
 const ChatbotComponent = () => {
   const [query, setQuery] = useState('');
   const [responses, setResponses] = useState([]); // Array de respuestas
-  const [loading, setLoading] = useState(false);
   const [typing, setTyping] = useState(false); // Nuevo estado para "Escribiendo..."
 
   // Referencia para el contenedor del chat, nos ayudará a anclar al final del chat
@@ -14,7 +13,6 @@ const ChatbotComponent = () => {
   const handleSend = async () => {
     if (!query) return;
 
-    setLoading(true);
     setTyping(true); // Mostrar "Escribiendo..."
 
     try {
@@ -46,7 +44,6 @@ const ChatbotComponent = () => {
       console.error(err);
     }
 
-    setLoading(false); // Dejar de mostrar "Escribiendo..."
     setTyping(false);  // Ocultar "Escribiendo..."
   };
 
