@@ -78,6 +78,8 @@ const ChatbotComponent = () => {
             </div>
           ))}
         </div>
+        {/* Mostrar "Escribiendo..." dentro de la ventana del chat */}
+        {loading && <p className="typingIndicatorInsideChat">Escribiendo...</p>}
       </div>
       {/* Sección fija en la parte inferior */}
       <div className="bottomSection">
