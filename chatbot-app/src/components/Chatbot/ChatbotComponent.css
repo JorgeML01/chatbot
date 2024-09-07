@@ -9,6 +9,7 @@
   padding: 20px;
   margin: 0 auto;
   background-color: #f4f4f4;
+
 }
 
 .chatWindow {
@@ -21,12 +22,16 @@
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 .typingIndicatorInsideChat {
+  bottom: 10px; /* 10px desde la parte inferior del chatwindow */
+  left: 10px; /* 10px desde la parte izquierda del chatwindow */
   color: #888;
   font-style: italic;
   font-size: 14px;
+  z-index: 1; /* Asegura que sea visible, pero dentro del chat */
 }
 
 .responseContainer {
@@ -100,23 +105,24 @@ button:hover {
 }
 
 @media screen and (max-width: 768px) {
-  .chatbot-container {
+  .chatWindow {
     width: 90%;
-    height: auto;
-    padding: 10px;
+    height: 250px;
+    padding-bottom: 30px; /* Ajustar el padding para el indicador en pantallas pequeñas */
   }
 
-  .chatWindow {
-    height: 250px;
+  .typingIndicatorInsideChat {
+    left: 10px; /* Ajustar para pantallas pequeñas */
   }
 }
 
 @media screen and (max-width: 480px) {
   .chatWindow {
     height: 200px;
+    padding-bottom: 30px; /* Ajustar el padding para el indicador en pantallas más pequeñas */
   }
 
-  input[type="text"], button {
-    width: 100%;
+  .typingIndicatorInsideChat {
+    left: 10px; /* Ajustar para pantallas pequeñas */
   }
 }

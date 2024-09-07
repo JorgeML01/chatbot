@@ -78,10 +78,7 @@ const ChatbotComponent = () => {
             </div>
           ))}
         </div>
-        {/* Mostrar "Escribiendo..." dentro de la ventana del chat */}
-        {loading && <p className="typingIndicatorInsideChat">Escribiendo...</p>}
       </div>
-      {/* Sección fija en la parte inferior */}
       <div className="bottomSection">
         {responses.length > 0 && (
           <div className="sentiment">
@@ -99,6 +96,7 @@ const ChatbotComponent = () => {
       </div>
     </div>
   );
+  
 };
 
 export default ChatbotComponent;
