@@ -17,20 +17,27 @@ function NavbarLayout() {
 
   const checkLoginStatus = useCallback(() => {
     const accessToken = Cookies.get("accessToken");
-    const refreshToken = Cookies.get("refreshToken");
-    
-    if (accessToken && refreshToken) {
+    const googleProfilePic = Cookies.get("userPicture");
+    const facebookProfilePic = Cookies.get("fbProfilePicture");
+
+    if (googleProfilePic || facebookProfilePic || accessToken) {
       setIsLoggedIn(true);
-      fetchProfilePic();
+
+      if (googleProfilePic) {
+        setProfilePicUrl(googleProfilePic);
+      } else if (facebookProfilePic) {
+        setProfilePicUrl(facebookProfilePic);
+      } else {
+        fetchProfilePic(); // Fetch desde tu API en caso de login convencional
+      }
     } else {
       setIsLoggedIn(false);
     }
   }, []);
 
   async function fetchProfilePic() {
-    const userId = jwtDecode(Cookies.get("accessToken")).id;
-    const url = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`; // URL de Ngrok
-    // const url = `http://localhost:5000/profile-pic/${userId}.jpg`;
+    const userId = Cookies.get("accessToken") ? jwtDecode(Cookies.get("accessToken")).id : null;
+    const url = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`; 
 
     try {
       const response = await fetch(url, {
@@ -54,6 +61,8 @@ function NavbarLayout() {
   function handleLogout() {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
+    Cookies.remove("userPicture"); // Eliminar la foto de Google
+    Cookies.remove("fbProfilePicture"); // Eliminar la foto de Facebook
     navigate("/login");
     window.location.reload();
   }

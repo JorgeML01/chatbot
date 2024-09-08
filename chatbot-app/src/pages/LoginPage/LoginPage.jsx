@@ -43,7 +43,7 @@ function LoginPage() {
     Cookies.set("userPicture", userObject.picture);
     
     navigate("/");
-    //window.location.reload();
+    window.location.reload();
   };
   
   
@@ -67,7 +67,7 @@ function LoginPage() {
     Cookies.set("userPicture", userObject.picture?.data?.url);
   
     navigate("/");
-    //window.location.reload();
+    window.location.reload();
   };
 
   const handleFacebookLoginFailure = (error) => {
