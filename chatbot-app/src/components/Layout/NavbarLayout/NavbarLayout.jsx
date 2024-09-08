@@ -64,6 +64,7 @@ function NavbarLayout() {
     Cookies.remove("refreshToken");
     Cookies.remove("userPicture"); // Eliminar la foto de Google
     Cookies.remove("fbProfilePicture"); // Eliminar la foto de Facebook
+    Cookies.remove("userName"); // Eliminar el nombre de Google
     navigate("/login");
     window.location.reload();
   }
