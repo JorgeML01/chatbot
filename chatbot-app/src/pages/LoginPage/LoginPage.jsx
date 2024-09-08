@@ -36,7 +36,6 @@ function LoginPage() {
     console.log("User email:", userObject.email);
     console.log("User name:", userObject.name);
     console.log("User profile picture:", userObject.picture);
-    console.log("TEST");
   
     // Guardar en cookies si es necesario
     Cookies.set("userEmail", userObject.email);
@@ -55,8 +54,20 @@ function LoginPage() {
 
   const handleFacebookLoginSuccess = (response) => {
     console.log('Facebook login success:', response);
+    
+    // Ejemplo de metadatos disponibles
+    const userObject = response.data;
+    console.log("User email:", userObject.email);
+    console.log("User name:", userObject.name);
+    console.log("User profile picture:", userObject.picture?.data?.url);
+  
+    // Guardar en cookies si es necesario
+    Cookies.set("userEmail", userObject.email);
+    Cookies.set("userName", userObject.name);
+    Cookies.set("userPicture", userObject.picture?.data?.url);
+  
     navigate("/");
-    window.location.reload();
+    //window.location.reload();
   };
 
   const handleFacebookLoginFailure = (error) => {
