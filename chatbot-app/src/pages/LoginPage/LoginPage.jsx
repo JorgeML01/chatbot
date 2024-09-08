@@ -8,6 +8,9 @@ import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
+import { jwtDecode } from 'jwt-decode';
+
+
 
 function LoginPage() {
   const [comparisonResult, setComparisonResult] = useState(null);
@@ -25,11 +28,26 @@ function LoginPage() {
   };
 
   const handleGoogleLoginSuccess = (response) => {
-    console.log('Google login success:', response);
+    // Decodificar el token JWT
+    const userObject = jwtDecode(response.credential);
+    console.log("Google login success:", userObject);
+  
+    // Ejemplo de metadatos disponibles
+    console.log("User email:", userObject.email);
+    console.log("User name:", userObject.name);
+    console.log("User profile picture:", userObject.picture);
+    console.log("TEST");
+  
+    // Guardar en cookies si es necesario
+    Cookies.set("userEmail", userObject.email);
+    Cookies.set("userName", userObject.name);
+    Cookies.set("userPicture", userObject.picture);
+    
     navigate("/");
-    window.location.reload();
+    //window.location.reload();
   };
-
+  
+  
   const handleGoogleLoginFailure = (error) => {
     console.log('Google login error:', error);
     setGoogleError("Google login failed. Please try again.");
