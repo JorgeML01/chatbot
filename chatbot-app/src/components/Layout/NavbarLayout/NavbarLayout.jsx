@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 import React, { useState, useEffect, useCallback } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
+
 function NavbarLayout() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);

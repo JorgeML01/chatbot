@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from "js-cookie";
-import { jwtDecode } from 'jwt-decode';
 import './profile.css'; // Asegúrate de crear y agregar los estilos en este archivo CSS
+import { jwtDecode } from 'jwt-decode';
 
 function Profile() {
     const [profilePicUrl, setProfilePicUrl] = useState('/default-profile.jpg'); // Imagen por defecto
@@ -10,9 +10,27 @@ function Profile() {
 
     useEffect(() => {
         const tokenAccess = Cookies.get("accessToken");
-        const tokenRefresh = Cookies.get("refreshToken");
-        
-        if (tokenAccess && tokenRefresh) {
+        const googleName = Cookies.get("userName");
+        const googleEmail = Cookies.get("userEmail");
+        const googleProfilePic = Cookies.get("userPicture");
+        const facebookName = Cookies.get("fbUserName");
+        const facebookEmail = Cookies.get("fbUserEmail");
+        const facebookProfilePic = Cookies.get("fbProfilePicture");
+
+        // Verificar si el usuario inició sesión con Google
+        if (googleName && googleEmail && googleProfilePic) {
+            setName(googleName);
+            setEmail(googleEmail);
+            setProfilePicUrl(googleProfilePic);
+        } 
+        // Verificar si el usuario inició sesión con Facebook
+        else if (facebookName && facebookEmail && facebookProfilePic) {
+            setName(facebookName);
+            setEmail(facebookEmail);
+            setProfilePicUrl(facebookProfilePic);
+        } 
+        // Verificar si el usuario inició sesión con token de acceso
+        else if (tokenAccess) {
             try {
                 const decodedToken = jwtDecode(tokenAccess);
                 const userId = decodedToken ? decodedToken.id : "default"; // Usar un ID por defecto en caso de que no esté disponible
@@ -21,7 +39,6 @@ function Profile() {
 
                 // Intentar cargar la imagen del perfil
                 const profilePicUrl = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`;
-                // const profilePicUrl = `http://localhost:5000/profile-pic/${userId}.jpg`;
 
                 fetch(profilePicUrl, {
                     method: "get",
@@ -33,7 +50,7 @@ function Profile() {
                     if (response.ok) {
                         setProfilePicUrl(profilePicUrl); // Imagen disponible
                     } else {
-                        setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto
+                        setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto si no está disponible
                     }
                 })
                 .catch(() => {
