@@ -6,6 +6,10 @@ import { Button, Form, Container, Row, Col, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./settings.css";
 
+// import AuthIdle from "../../assets/images/auth-idle.svg";
+// import AuthFace from "../../assets/images/auth-face.svg";
+// import * as faceapi from "face-api.js";
+
 function Settings() {
     const tokenAccess = Cookies.get("accessToken");
     const tokenRefresh = Cookies.get("refreshToken");
