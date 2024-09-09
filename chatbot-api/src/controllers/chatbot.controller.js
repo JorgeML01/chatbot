@@ -2,7 +2,7 @@ const { SessionsClient } = require('@google-cloud/dialogflow-cx');
 const fs = require('fs');
 const projectId = 'chatbot-app-435019';
 const location = 'global';
-const agentId = 'ca219127-6819-41a8-a732-99c4be69b519';
+const agentId = '63b79538-1be3-4268-abff-04739018080b';
 
 
 const path = require('path');
@@ -30,7 +30,7 @@ async function detectIntent(req, res) {
           text: {
             text: query,
           },
-          languageCode: languageCode || 'es',
+          languageCode: languageCode || 'en',
         },
     };
 
