@@ -132,13 +132,16 @@ function LoginPage() {
     formData.append('file', selectedFile);
 
     try {
-      // https://face-recognition-chatbot-api-1.onrender.com/compare
       const response = await fetch('https://face-recognition-chatbot-api-1.onrender.com/compare', {
-        //mode: 'no-cors',
         method: 'POST',
         body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          // Agrega más headers si es necesario
+        },
+        credentials: 'include',  // Esto asegura que se envíen cookies
       });
-
+    
       if (response.ok) {
         const data = await response.json();
         setComparisonResult(data);
@@ -149,7 +152,6 @@ function LoginPage() {
     } catch (error) {
       console.error('Error comparing file:', error);
     }
-  };
 
   return (
     <div className="d-flex justify-content-center align-items-center login-body" style={{ height: '80vh' }}>
