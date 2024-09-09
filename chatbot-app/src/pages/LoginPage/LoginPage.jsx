@@ -133,7 +133,7 @@ function LoginPage() {
 
     try {
       // https://face-recognition-chatbot-api-1.onrender.com/compare
-      const response = await fetch('http://localhost:5000/compare', {
+      const response = await fetch('https://face-recognition-chatbot-api-1.onrender.com/compare', {
         //mode: 'no-cors',
         method: 'POST',
         body: formData,
