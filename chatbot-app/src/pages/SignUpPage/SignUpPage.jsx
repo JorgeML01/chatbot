@@ -57,7 +57,7 @@ function SignUpPage() {
       formData.append("username", username); // Relacionar la foto con el username o email
 
       const photoResponse = await axios.post(
-        "http://localhost:8080/upload/" + username, // Usar el ID del usuario recién registrado
+        "http://localhost:8080/upload/" + email, // Usar el ID del usuario recién registrado
         formData,
         {
           headers: {

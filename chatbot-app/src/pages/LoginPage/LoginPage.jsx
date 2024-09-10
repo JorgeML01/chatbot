@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './styles.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { GoogleLogin } from '@react-oauth/google';
@@ -9,19 +10,18 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { jwtDecode } from 'jwt-decode';
-
-
-
+import { FaFingerprint } from 'react-icons/fa'; // Importar el ícono de reconocimiento facial
 
 function LoginPage() {
+  const [showModal, setShowModal] = useState(false);
+  const [username, setUsername] = useState("");
   const [comparisonResult, setComparisonResult] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const navigate = useNavigate();
   const [errorMessages, setErrorMessages] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [facebookError, setFacebookError] = useState("");
   const [googleError, setGoogleError] = useState("");
+  const navigate = useNavigate();
 
   const handleLoginSuccess = () => {
     navigate("/");
@@ -46,7 +46,6 @@ function LoginPage() {
     navigate("/");
     window.location.reload();
   };
-  
   
   const handleGoogleLoginFailure = (error) => {
     console.log('Google login error:', error);
@@ -120,37 +119,16 @@ function LoginPage() {
     }
   };
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
-  const handleCompare = async () => {
-    if (!selectedFile) {
-      alert("Please select a file first!");
-      return;
-    }
+  const handleUsernameSubmit = async () => {
+    handleCloseModal();
+    // Aquí puedes manejar la lógica para el `username`, si es necesario
+    console.log('Username:', username);
 
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-
-    try {
-      // https://face-recognition-chatbot-api-1.onrender.com/compare
-      const response = await fetch('https://face-recognition-chatbot-api-1.onrender.com/compare', {
-        //mode: 'no-cors',
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setComparisonResult(data);
-        console.log('Comparison result:', data);
-      } else {
-        console.error('Error comparing file:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error comparing file:', error);
-    }
+    // Ejemplo de cómo podrías enviar el username a un servidor o usarlo en el estado de la aplicación
+    // ...
   };
 
   return (
@@ -183,28 +161,41 @@ function LoginPage() {
           </Button>
         </Form>
 
-        <Form.Group className="mt-3">
-          <Form.Label>Facial Recognition</Form.Label>
-          <Form.Control 
-            type="file" 
-            onChange={handleFileChange}
+        {/* Face Recognition Icon and Modal */}
+        <div className="mt-3 text-center">
+          <FaFingerprint 
+            onClick={handleShowModal} 
+            size={50} 
+            style={{ cursor: 'pointer', color: '#007bff' }}
           />
-          <Button 
-            type="button" 
-            className="button-login mt-2" 
-            onClick={handleCompare}
-          >
-            Compare Photo
-          </Button>
-        </Form.Group>
+          <p>Click the icon for facial recognition</p>
+        </div>
 
-        {comparisonResult && (
-          <div className="mt-3">
-            <h5>Comparison Result:</h5>
-            <p>{comparisonResult.message}</p>
-            {comparisonResult.match && <p>Matching photo: {comparisonResult.match}</p>}
-          </div>
-        )}
+        {/* Modal for Username Input */}
+        <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Enter Username</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group className="mb-3" controlId="formUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleUsernameSubmit}>
+              Continue
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
         {facebookError && <Form.Text className="text-danger">{facebookError}</Form.Text>}
         {googleError && <Form.Text className="text-danger">{googleError}</Form.Text>}
