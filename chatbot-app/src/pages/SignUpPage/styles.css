@@ -1,6 +1,7 @@
 /* General styling for the signup page */
 .signup-body {
     background-color: #f8f9fa; /* Light grey background for the entire page */
+    margin-top: 15vh; /* Full height of the viewport */
   }
   
   .form-style {

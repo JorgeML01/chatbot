@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-
-// Facebook and Google buttons
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
-
 import './styles.css';
-
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -20,15 +16,16 @@ function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [photo, setPhoto] = useState(null); // Para manejar la imagen
   const [errorMessages, setErrorMessages] = useState({});
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    if (!fullName || !username || !email || !password || !confirmPassword) {
+
+    if (!fullName || !username || !email || !password || !confirmPassword || !photo) {
       setErrorMessages({
         field: "form",
-        message: "All fields are required.",
+        message: "All fields, including the photo, are required.",
       });
       return;
     }
@@ -42,10 +39,10 @@ function SignUpPage() {
     }
 
     try {
-
       console.log("Registering user:", { email, password, name: fullName });
 
-      const response = await axios.post(
+      // Primero registrar al usuario
+      const userResponse = await axios.post(
         "https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/register",
         {
           email,
@@ -53,13 +50,30 @@ function SignUpPage() {
           name: fullName,
         }
       );
-      console.log("Sign up success:", response);
 
+      // Si el registro es exitoso, proceder con la subida de la foto
+      const formData = new FormData();
+      formData.append("photo", photo);
+      formData.append("username", username); // Relacionar la foto con el username o email
+
+      const photoResponse = await axios.post(
+        "http://localhost:8080/upload/" + username, // Usar el ID del usuario recién registrado
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      console.log("Photo upload success:", photoResponse);
+
+      // Redirigir al login después de que todo haya sido exitoso
       navigate("/login");
       window.location.reload();
-      // Handle successful sign up, e.g., navigate to login page
+
     } catch (error) {
-      console.error("Error during sign up:", error);
+      console.error("Error during sign up or photo upload:", error);
       if (error.response) {
         setErrorMessages({
           field: "server",
@@ -67,6 +81,10 @@ function SignUpPage() {
         });
       }
     }
+  };
+
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]); // Guardar la foto seleccionada
   };
 
   const handleGoogleSignUpSuccess = (response) => {
@@ -131,6 +149,14 @@ function SignUpPage() {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             {errorMessages.field === "password" && <Form.Text className="text-danger">{errorMessages.message}</Form.Text>}
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formPhoto">
+            <Form.Label>Upload an auth photo</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={handlePhotoChange}
+            />
           </Form.Group>
 
           <Button type="submit" className="button-login">
