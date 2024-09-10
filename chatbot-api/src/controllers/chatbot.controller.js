@@ -1,9 +1,8 @@
 const { SessionsClient } = require('@google-cloud/dialogflow-cx');
 const fs = require('fs');
-const projectId = 'chatbot-app-435019';
+const projectId = 'chatbot-app-433407';
 const location = 'global';
-const agentId = '63b79538-1be3-4268-abff-04739018080b';
-
+const agentId = '49e6c049-9f84-45d9-a725-296cbf206d5c';
 
 const path = require('path');
 const keyFilename = path.join(__dirname, 'credentials.json');
