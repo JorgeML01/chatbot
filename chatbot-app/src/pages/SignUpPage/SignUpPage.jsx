@@ -42,7 +42,7 @@ function SignUpPage() {
       console.log("Registering user:", { email, password, name: fullName });
 
       // Primero registrar al usuario
-      const userResponse = await axios.post(
+      await axios.post(
         "https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/register",
         {
           email,
