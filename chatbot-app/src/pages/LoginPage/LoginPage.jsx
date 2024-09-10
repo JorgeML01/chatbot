@@ -15,7 +15,6 @@ import { FaFingerprint } from 'react-icons/fa'; // Importar el ícono de reconoc
 function LoginPage() {
   const [showModal, setShowModal] = useState(false);
   const [username, setUsername] = useState("");
-  const [comparisonResult, setComparisonResult] = useState(null);
   const [errorMessages, setErrorMessages] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
