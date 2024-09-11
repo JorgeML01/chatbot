@@ -52,11 +52,11 @@ function NavbarLayout() {
       if (response.ok) {
         setProfilePicUrl(url); // Imagen disponible
       } else {
-        setProfilePicUrl('/default-profile.png'); // Imagen por defecto si no está disponible
+        setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto si no está disponible
       }
     } catch (error) {
       console.error('Error fetching profile picture:', error);
-      setProfilePicUrl('/default-profile.png'); // Imagen por defecto en caso de error
+      setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto en caso de error
     }
   }
 
