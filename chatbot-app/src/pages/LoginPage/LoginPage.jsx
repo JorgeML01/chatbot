@@ -11,6 +11,7 @@ import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { jwtDecode } from 'jwt-decode';
 import { FaFingerprint } from 'react-icons/fa'; // Importar el ícono de reconocimiento facial
+import { IconMdiFaceRecognition } from '../../components/Auth/IconMdiFaceRecognition'; // Importar el ícono de reconocimiento facial
 
 function LoginPage() {
   const [showModal, setShowModal] = useState(false);
@@ -160,11 +161,11 @@ function LoginPage() {
 
         {/* Face Recognition Icon and Modal */}
         <div className="mt-3 text-center">
-          <FaFingerprint 
+            <IconMdiFaceRecognition 
             onClick={handleShowModal} 
-            size={50} 
-            style={{ cursor: 'pointer', color: '#007bff' }}
-          />
+            height="50px" 
+            style={{ cursor: 'pointer', color: '#007bff' }} 
+            />
           <p>Click the icon for facial recognition</p>
         </div>
 
