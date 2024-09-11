@@ -50,6 +50,7 @@ async function getPhotos(req, res) {
 
     // Si es un archivo, enviar la imagen directamente al navegador
     if (stats.isFile()) {
+      console.log('Sending photo:', photoPath);
       return res.sendFile(photoPath); // Envía el archivo como respuesta
     } else {
       return res.status(404).json({ error: 'File not found' });
