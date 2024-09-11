@@ -108,42 +108,41 @@ async function login(req, res) {
 
 // Controlador para obtener usuario por correo y enviar tokens
 async function getUserByEmail(req, res) {
+  
   const email = req.params.email; // Obtener el email desde los parámetros de la ruta
   console.log("Email recibido:", email); // Depurar el email recibido
 
   try {
-    const user = await getCredentialsNoPass(email); // Pasar el email a la función
+    const [credentials] = await getCredentials(email);
 
-    if (!user || user.length === 0) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    // Generar tokens JWT
+     // Generar tokens JWT
     const accessToken = jwt.sign(
-      { email: user.email, id: user.id, name: user.name },
+      {
+        email,
+        id: credentials.id,
+        name: credentials.name,
+      },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1d" } // Tiempo de expiración del token
+      { expiresIn: "1d" }
     );
 
     const refreshToken = jwt.sign(
-      { email: user.email, id: user.id, name: user.name },
+      { email, id: credentials.id, name: credentials.name },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "7d" } // Duración más larga para refreshToken
+      { expiresIn: "1m" }
     );
 
-    // Enviar los tokens en la respuesta
-    res.json({
-      success: true,
-      data: {
-        accessToken,
-        refreshToken,
-      },
-    });
+    res.send({ sucess: true, data: { accessToken, refreshToken } });
+
+    console.log('Access Token:', accessToken);
+    console.log('Refresh Token:', refreshToken);
+
   } catch (error) {
     console.error("Error fetching user:", error); // Mostrar el error real
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
 
 
 module.exports = { register, login, getUserByEmail };
