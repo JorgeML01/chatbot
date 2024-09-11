@@ -175,10 +175,10 @@ function LoginPage() {
           </Modal.Header>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="formUsername">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter username"
+                placeholder="Enter email"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
