@@ -1,4 +1,4 @@
-const { registerUser, getCredentials } = require("../services/users.service");
+const { registerUser, getCredentials, getCredentialsNoPass } = require("../services/users.service");
 const { isEmail, isPassword } = require("../utils/validator");
 const HTTPCodes = require("../utils/HTTPCodes");
 const crypto = require("crypto");
@@ -106,4 +106,44 @@ async function login(req, res) {
   }
 }
 
-module.exports = { register, login };
+// Controlador para obtener usuario por correo y enviar tokens
+async function getUserByEmail(req, res) {
+  const email = req.params.email; // Obtener el email desde los parámetros de la ruta
+  console.log("Email recibido:", email); // Depurar el email recibido
+
+  try {
+    const user = await getCredentialsNoPass(email); // Pasar el email a la función
+
+    if (!user || user.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Generar tokens JWT
+    const accessToken = jwt.sign(
+      { email: user.email, id: user.id, name: user.name },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1d" } // Tiempo de expiración del token
+    );
+
+    const refreshToken = jwt.sign(
+      { email: user.email, id: user.id, name: user.name },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: "7d" } // Duración más larga para refreshToken
+    );
+
+    // Enviar los tokens en la respuesta
+    res.json({
+      success: true,
+      data: {
+        accessToken,
+        refreshToken,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching user:", error); // Mostrar el error real
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+
+module.exports = { register, login, getUserByEmail };

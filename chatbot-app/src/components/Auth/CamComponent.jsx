@@ -4,6 +4,7 @@ import AuthIdle from "../../assets/images/auth-idle.svg";
 import AuthFace from "../../assets/images/auth-face.svg";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import axios from "axios";
 import './CamComponent.css'; // Importa el CSS
 
 function CamComponent() {
@@ -45,24 +46,47 @@ function CamComponent() {
   }, []);
 
   useEffect(() => {
-    if (loginResult === "SUCCESS") {
+    const username = Cookies.get('username');
+  
+    if (loginResult === 'SUCCESS') {
       const counterInterval = setInterval(() => {
-        setCounter((counter) => counter - 1);
+        setCounter((prevCounter) => prevCounter - 1);
       }, 1000);
-
+  
       if (counter === 0) {
-        videoRef.current.pause();
-        videoRef.current.srcObject = null;
-        localUserStream.getTracks().forEach((track) => track.stop());
+        if (videoRef.current) {
+          videoRef.current.pause();
+          videoRef.current.srcObject = null;
+        }
+  
+        if (localUserStream.current) {
+          localUserStream.current.getTracks().forEach((track) => track.stop());
+        }
+  
         clearInterval(counterInterval);
         clearInterval(faceApiIntervalRef.current);
-        localStorage.setItem("faceAuth", JSON.stringify({ status: true }));
-        navigate("/");
-      }
+  
+        // Actualizar cookies con los nuevos tokens
+        axios.get(`http://localhost:8080/user/${username}`)
+          .then((response) => {
+            const { accessToken, refreshToken } = response.data.data;
+            Cookies.set('accessToken', accessToken);
+            Cookies.set('refreshToken', refreshToken);
+            localStorage.setItem('faceAuth', JSON.stringify({ status: true }));
+            navigate("/");
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error('Error fetching tokens:', error);
+          });
+  
 
+      }
+  
       return () => clearInterval(counterInterval);
     }
   }, [loginResult, counter, localUserStream, navigate]);
+  
 
   const getLocalUserVideo = async () => {
     try {

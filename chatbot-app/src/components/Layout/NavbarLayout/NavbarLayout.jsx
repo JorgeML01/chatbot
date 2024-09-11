@@ -36,6 +36,7 @@ function NavbarLayout() {
     }
   }, []);
 
+
   async function fetchProfilePic() {
     const userId = Cookies.get("accessToken") ? jwtDecode(Cookies.get("accessToken")).id : null;
     const url = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`; 

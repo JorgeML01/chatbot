@@ -40,9 +40,19 @@ const getCredentials = async (email) => {
   return JSON.parse(credentials);
 };
 
+const getCredentialsNoPass = async (email) => {
+  let credentials = await knex
+    .select("id", "name")
+    .from("users")
+    .where("email", email);
+  credentials = JSON.stringify(credentials);
+
+  return JSON.parse(credentials);
+};
 
 
 module.exports = {
   getCredentials,
+  getCredentialsNoPass,
   registerUser,
 };
