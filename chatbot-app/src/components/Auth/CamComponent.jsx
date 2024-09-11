@@ -127,7 +127,7 @@ function CamComponent() {
 
     const descriptions = [];
     try {
-      const imgPath = `http://localhost:8080/photos/toto.jpeg`; // Asegúrate de que la ruta sea correcta
+      const imgPath = `http://localhost:8080/photos/` + username + ".jpeg"; // Asegúrate de que la ruta sea correcta
       const img = await faceapi.fetchImage(imgPath);
       const detections = await faceapi
         .detectSingleFace(img)
