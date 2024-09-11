@@ -33,7 +33,7 @@ const PhotoUpload = () => {
     formData.append('photo', selectedFile);
 
     try {
-      const response = await axios.post('http://localhost:8080/upload/customUserId', formData, {
+      const response = await axios.post('https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/upload/customUserId', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

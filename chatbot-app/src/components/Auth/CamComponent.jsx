@@ -67,7 +67,7 @@ function CamComponent() {
         clearInterval(faceApiIntervalRef.current);
   
         // Actualizar cookies con los nuevos tokens
-        axios.get(`http://localhost:8080/user/${username}`)
+        axios.get(`https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/user/${username}`)
           .then((response) => {
             const { accessToken, refreshToken } = response.data.data;
             Cookies.set('accessToken', accessToken);
