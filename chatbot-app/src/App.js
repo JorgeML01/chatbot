@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import SettingsPage from "./pages/SettingsPage";
 import SignUpPage from "./pages/SignUpPage";
 import ProfilePage from "./pages/ProfilePage";
+import FaceRecognitionPage from "./pages/FaceRecognitionPage";
 import NavbarLayout from "./components/Layout/NavbarLayout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/settings" element={<SettingsPage/>} />
           <Route path="/chatbot" element={<ChatbotPage/>} />
           <Route path="/perfil" element={<ProfilePage/>} />
+          <Route path="/face-recognition" element={<FaceRecognitionPage/>} />
         </Routes>
       </Router>
     </>

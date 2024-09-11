@@ -123,11 +123,9 @@ function LoginPage() {
 
   const handleUsernameSubmit = async () => {
     handleCloseModal();
-    // Aquí puedes manejar la lógica para el `username`, si es necesario
     console.log('Username:', username);
-
-    // Ejemplo de cómo podrías enviar el username a un servidor o usarlo en el estado de la aplicación
-    // ...
+    Cookies.set("username", username);
+    navigate("/face-recognition");
   };
 
   return (
