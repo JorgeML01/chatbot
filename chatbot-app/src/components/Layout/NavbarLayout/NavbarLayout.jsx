@@ -50,7 +50,7 @@ function NavbarLayout() {
     const profilePicUrl = `https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/photos/` + decodedToken.email  + '-pro.jpeg';
 
     try {
-      const response = await fetch(url, {
+      const response = await fetch(profilePicUrl, {
         method: "get",
         headers: new Headers({
           "ngrok-skip-browser-warning": "false",
