@@ -151,7 +151,10 @@ function CamComponent() {
 
     const descriptions = [];
     try {
-      const imgPath = `https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/photos/` + username + ".jpeg"; // Asegúrate de que la ruta sea correcta
+
+      
+      //const imgPath = `https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/photos/` + username + ".jpeg"; // Asegúrate de que la ruta sea correcta
+      
       const img = await faceapi.fetchImage(imgPath);
       const detections = await faceapi
         .detectSingleFace(img)

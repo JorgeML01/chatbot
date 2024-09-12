@@ -37,8 +37,11 @@ function Profile() {
                 setName(decodedToken ? decodedToken.name : 'User');
                 setEmail(decodedToken ? decodedToken.email : 'Email');
 
-                // Intentar cargar la imagen del perfil
-                const profilePicUrl = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`;
+                // TODO: Cambiar la URL de la API. Usar la de nodejs.
+                //
+                //
+                //const profilePicUrl = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`;
+                const profilePicUrl = `https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/photos/` + decodedToken.email  + '-pro.jpeg';
 
                 fetch(profilePicUrl, {
                     method: "get",

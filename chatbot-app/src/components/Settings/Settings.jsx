@@ -49,8 +49,10 @@ function Settings() {
         formData.append("userId", userId); // Enviar el ID del usuario
 
         try {
-            // https://face-recognition-chatbot-api-1.onrender.com/upload
-            const response = await axios.post('https://face-recognition-chatbot-api-1.onrender.com/upload', formData, {
+            //const urlUpload =  "https://face-recognition-chatbot-api-1.onrender.com/upload";
+            const url = `https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/upload/${decodedToken.email}-pro.jpeg`;
+
+            const response = await axios.post(urlUpload, formData, {
                 headers: {
                     // 'Content-Type': 'multipart/form-data',
                 },
