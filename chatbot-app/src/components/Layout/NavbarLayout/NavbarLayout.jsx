@@ -40,17 +40,11 @@ function NavbarLayout() {
   async function fetchProfilePic() {
     const userId = Cookies.get("accessToken") ? jwtDecode(Cookies.get("accessToken")).id : null;
 
-    const accessToken = Cookies.get("accessToken");
-    const decodedToken = accessToken ? jwtDecode(accessToken) : null;
-
-    // TODO: Cambiar la URL de la API. Usar la de nodejs.
-    //
-    //
-    //const url = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`; 
-    const profilePicUrl = `https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/photos/` + decodedToken.email  + '-pro.jpeg';
+    // TODO: Cambiar la URL de la API.
+    const url = `https://face-recognition-chatbot-api-1.onrender.com/profile-pic/${userId}.jpg`; 
 
     try {
-      const response = await fetch(profilePicUrl, {
+      const response = await fetch(url, {
         method: "get",
         headers: new Headers({
           "ngrok-skip-browser-warning": "false",
@@ -58,7 +52,7 @@ function NavbarLayout() {
       });
 
       if (response.ok) {
-        setProfilePicUrl(profilePicUrl); // Imagen disponible
+        setProfilePicUrl(url); // Imagen disponible
       } else {
         setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto si no está disponible
       }
