@@ -40,6 +40,9 @@ function NavbarLayout() {
   async function fetchProfilePic() {
     const userId = Cookies.get("accessToken") ? jwtDecode(Cookies.get("accessToken")).id : null;
 
+    const accessToken = Cookies.get("accessToken");
+    const decodedToken = accessToken ? jwtDecode(accessToken) : null;
+
     // TODO: Cambiar la URL de la API. Usar la de nodejs.
     //
     //
@@ -55,7 +58,7 @@ function NavbarLayout() {
       });
 
       if (response.ok) {
-        setProfilePicUrl(url); // Imagen disponible
+        setProfilePicUrl(profilePicUrl); // Imagen disponible
       } else {
         setProfilePicUrl('/default-profile.jpg'); // Imagen por defecto si no está disponible
       }
