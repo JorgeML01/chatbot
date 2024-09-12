@@ -172,7 +172,7 @@ function LoginPage() {
         {/* Modal for Username Input */}
         <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Enter Username</Modal.Title>
+            <Modal.Title>Enter Email</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="formUsername">
