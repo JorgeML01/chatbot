@@ -29,7 +29,7 @@ function MainPage() {
     return (
         <div>
             <div className="welcome-message">
-                Welcome, {name}!
+                Welcome back, {name}!
             </div>
             <UpperButtons />
             <BodyMain />
