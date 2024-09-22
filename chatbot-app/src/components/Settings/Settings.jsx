@@ -70,7 +70,7 @@ function Settings() {
             <Row className="justify-content-center mt-5">
                 <Col md={6}>
                     <div className="text-center">
-                        <h1>Update Profile/Auth Picture</h1>
+                        <h1>Update Profile</h1>
                         <p>Choose a new photo to update your profile picture.</p>
                         <Form>
                             <Form.Group controlId="formFile">

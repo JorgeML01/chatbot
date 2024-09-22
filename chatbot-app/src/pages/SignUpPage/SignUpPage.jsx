@@ -97,7 +97,7 @@ function SignUpPage() {
 
   return (
     <div className="d-flex justify-content-center align-items-center signup-body" style={{ height: '100vh' }}>
-      <div className="w-50 form-style">
+      <div className="w form-style">
         <h3>Sign Up</h3>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formFullName">

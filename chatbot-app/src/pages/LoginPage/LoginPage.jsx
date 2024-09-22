@@ -131,7 +131,7 @@ function LoginPage() {
 
   return (
     <div className="d-flex justify-content-center align-items-center login-body" style={{ height: '80vh' }}>
-      <div className="w-50 form-style">
+      <div className="form-style">
         <h3>Log In</h3>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
