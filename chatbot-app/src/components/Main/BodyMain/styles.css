@@ -1,21 +1,31 @@
+/* styles.css */
 .body-main {
-    background-color: #03318C!important;
+    background-color: #03318C !important;
     font-family: 'Roboto', sans-serif;
     margin: 4%;
     margin-top: 0;
     display: flex;
+    justify-content: space-between;
     height: 75vh;
     /* border: 2px solid red; */
 }
 
 .silabo-contenedor {
-    width: 70% !important; 
-    /* border: 2px solid red; */
+    width: 100% !important; 
+    border: 2px solid red;
+}
+
+.pdf-viewer {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .semanas-contenedor {
     color: white !important;
     width: 30% !important;
+    display: flex;
+    justify-content: flex-end;
 }
 
 li {
@@ -33,4 +43,31 @@ li:hover {
 
 .ultima-semana {
     border-bottom: none;
+}
+
+/* Responsive design: Move week list below the PDF viewer on smaller screens */
+@media (max-width: 768px) {
+    .body-main {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .silabo-contenedor {
+        width: 100% !important;
+        height: 60vh;
+        margin-bottom: 20px;
+    }
+
+    .semanas-contenedor {
+        width: 100% !important;
+        justify-content: center;
+        margin-top: 0;
+    }
+
+    li {
+        text-align: center;
+        padding: 10px;
+        border-bottom: 2px solid white;
+    }
 }
