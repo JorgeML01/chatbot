@@ -1,9 +1,9 @@
 .profile-container {
     text-align: center;
     padding: 20px;
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .profile-picture {
@@ -15,7 +15,7 @@
     height: 150px;
     border-radius: 50%; /* Esto hace que la imagen sea circular */
     object-fit: cover; /* Ajusta la imagen dentro del círculo */
-    border: 2px solid #ddd; /* Opcional: Añade un borde alrededor de la imagen */
+    border: 2px solid #ddd; 
 }
 
 .profile-info {

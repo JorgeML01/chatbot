@@ -1,14 +1,14 @@
 /* General styling for the signup page */
 .signup-body {
-    background-color: #f8f9fa; /* Light grey background for the entire page */
+    /* background-color: #f8f9fa;  */
     margin-top: 15vh; /* Full height of the viewport */
   }
   
   .form-style {
-    background: #fff; /* White background for the form container */
+    /* background: #fff; */
     padding: 2rem; /* Padding around the form */
     border-radius: 0.5rem; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow around the form */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  */
   }
   
   /* Form header styling */

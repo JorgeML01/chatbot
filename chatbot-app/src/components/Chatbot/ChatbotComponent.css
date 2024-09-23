@@ -8,7 +8,8 @@
   height: 80vh;
   padding: 20px;
   margin: 0 auto;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
+  /* background: linear-gradient(90deg, #adc8d6, #ffffff);  */
 }
 
 .chatWindow {
@@ -19,7 +20,7 @@
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #fff;
+  /* background-color: #fff; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative; /* Para permitir el posicionamiento absoluto del indicador de "Escribiendo..." */
 }
@@ -64,8 +65,8 @@
   flex-direction: column;
   width: 100%;
   padding-top: 10px;
-  background-color: #f4f4f4;
-  border-top: 1px solid #ddd;
+  /* background-color: #f4f4f4; */
+  /* border-top: 1px solid #ddd; */
 }
 
 input[type="text"] {
@@ -73,7 +74,7 @@ input[type="text"] {
   width: calc(100% - 20px);
   margin: 0 0 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   box-sizing: border-box;
 }
 
