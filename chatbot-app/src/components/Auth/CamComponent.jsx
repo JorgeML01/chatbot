@@ -88,6 +88,25 @@ function CamComponent() {
   }, [loginResult, counter, localUserStream, navigate]);
   
 
+  async function fetchImageWithFallback(username) {
+    const basePath = `https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/photos/`;
+    const formats = ['jpeg', 'jpg', 'png']; // Lista de formatos a intentar
+    let img;
+
+    for (let format of formats) {
+        const imgPath = `${basePath}${username}.${format}`;
+        try {
+            img = await faceapi.fetchImage(imgPath);
+            console.log(`Imagen encontrada: ${imgPath}`);
+            return img; // Si encuentra la imagen, la devuelve y termina el bucle
+        } catch (error) {
+            console.log(`No se encontró la imagen en formato ${format}`);
+        }
+    }
+
+    throw new Error("No se pudo encontrar la imagen en ninguno de los formatos."); // Si no se encuentra ninguna imagen
+  }
+
   const getLocalUserVideo = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -152,8 +171,15 @@ function CamComponent() {
     const descriptions = [];
     try {
 
-      const imgPath = `https://app-e0a913bb-2fe4-4de5-956b-cbc49890465c.cleverapps.io/photos/` + username + ".jpeg"; // Asegúrate de que la ruta sea correcta
-      const img = await faceapi.fetchImage(imgPath);
+      let img = null;
+      // Ejemplo de uso
+      try {
+        img = await fetchImageWithFallback(username);
+        // Continúa con el procesamiento de la imagen
+      } catch (error) {
+        console.error(error.message);
+      }
+
       const detections = await faceapi
         .detectSingleFace(img)
         .withFaceLandmarks()

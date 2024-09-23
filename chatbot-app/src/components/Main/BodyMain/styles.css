@@ -37,6 +37,13 @@ li {
     text-align: right;
 }
 
+ul {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0;
+    /* border: 2px solid red; */
+}
+
 li:hover {
     background-color: #3999BF;
 }
@@ -69,5 +76,10 @@ li:hover {
         text-align: center;
         padding: 10px;
         border-bottom: 2px solid white;
+    }
+
+    .pdf-viewer {
+        width: 100%;
+        height: 60vh;
     }
 }
