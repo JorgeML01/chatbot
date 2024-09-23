@@ -146,6 +146,7 @@ function CamComponent() {
             setLoginResult("SUCCESS");
           } else {
             setLoginResult("FAILED");
+            setCounter(5);
           }
         } else {
           setLoginResult("FAILED");
