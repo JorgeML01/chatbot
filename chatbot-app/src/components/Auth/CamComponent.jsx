@@ -5,7 +5,7 @@ import AuthFace from "../../assets/images/auth-face.svg";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
-import './CamComponent.css'; // Importa el CSS
+import './CamComponent.css';
 
 function CamComponent() {
   const videoRef = useRef();

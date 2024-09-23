@@ -61,6 +61,23 @@ const ChatbotComponent = () => {
     }
   }, [responses]); // Solo desplazar cuando cambien las respuestas
 
+  function determineSentiment(sentiment) {
+    const { score, magnitude } = sentiment;
+  
+    if (magnitude === 0 || Math.abs(score) < 0.2) {
+      return "Neutro";
+    } else if (score > 0.5) {
+      return "Positivo";
+    } else if (score < -0.5) {
+      return "Negativo";
+    } else if (Math.abs(score) < 0.5 && magnitude > 3.0) {
+      return "Mixto";
+    }
+  
+    // Por defecto:
+    return score > 0 ? "Positivo" : "Negativo";
+  }
+
   return (
     <div className="chatbot-container">
       <h2>Sil-Chatbot</h2>
@@ -83,7 +100,7 @@ const ChatbotComponent = () => {
       <div className="bottomSection">
         {responses.length > 0 && (
           <div className="sentiment">
-            <p><strong>Análisis de Sentimiento:</strong> {responses[responses.length - 1].sentiment.score > 0 ? 'Positivo' : 'Negativo'}</p>
+            <p><strong>Análisis de Sentimiento:</strong> {determineSentiment(responses[responses.length - 1].sentiment)}</p>
           </div>
         )}
         <input
